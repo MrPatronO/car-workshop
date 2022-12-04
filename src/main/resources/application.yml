@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: 'jdbc:postgresql://localhost:5432/car_workshop'
+    username: postgres
+    password: asdf1234
+    platform: 'org.hibernate.dialect.PostgreSQLDialect'
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        default_schema: car_workshop
+
