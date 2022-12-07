@@ -1,9 +1,11 @@
-package com.github.MrPatronO.carworkshop.repository;
+package com.github.MrPatronO.carworkshop.repositories;
 
-import com.github.MrPatronO.carworkshop.model.Timetable;
+import com.github.MrPatronO.carworkshop.models.Timetable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TimetableRepository extends JpaRepository<Timetable, Integer> {
+
+    boolean existsById(int timetableId);
 }

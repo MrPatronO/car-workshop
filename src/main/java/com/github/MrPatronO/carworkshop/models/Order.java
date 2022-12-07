@@ -1,4 +1,4 @@
-package com.github.MrPatronO.carworkshop.model;
+package com.github.MrPatronO.carworkshop.models;
 
 import jakarta.persistence.*;
 
@@ -23,12 +23,25 @@ public class Order {
     @Column(nullable = false)
     private int timetable;
 
+    public Order() {
+    }
+
+    Order(int orderId, String description, int client, int car, double price, int stand, String status, int timetable) {
+        this.orderId = orderId;
+        this.description = description;
+        this.client = client;
+        this.car = car;
+        this.price = price;
+        this.stand = stand;
+        this.status = status;
+        this.timetable = timetable;
+    }
 
     public int getOrderId() {
         return orderId;
     }
 
-    void setOrderId(int orderId) {
+    public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
 
@@ -36,7 +49,7 @@ public class Order {
         return description;
     }
 
-    void setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -44,7 +57,7 @@ public class Order {
         return client;
     }
 
-    void setClient(int client) {
+    public void setClient(int client) {
         this.client = client;
     }
 
@@ -52,7 +65,7 @@ public class Order {
         return car;
     }
 
-    void setCar(int car) {
+    public void setCar(int car) {
         this.car = car;
     }
 
@@ -60,7 +73,7 @@ public class Order {
         return price;
     }
 
-    void setPrice(double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -68,7 +81,7 @@ public class Order {
         return stand;
     }
 
-    void setStand(int stand) {
+    public void setStand(int stand) {
         this.stand = stand;
     }
 
@@ -76,7 +89,7 @@ public class Order {
         return status;
     }
 
-    void setStatus(String status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -84,7 +97,7 @@ public class Order {
         return timetable;
     }
 
-    void setTimetable(int timetable) {
+    public void setTimetable(int timetable) {
         this.timetable = timetable;
     }
 }

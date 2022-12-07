@@ -1,14 +1,15 @@
 package com.github.MrPatronO.carworkshop.services;
 
-import com.github.MrPatronO.carworkshop.model.Car;
-import com.github.MrPatronO.carworkshop.repository.CarRepository;
+import com.github.MrPatronO.carworkshop.models.Car;
+import com.github.MrPatronO.carworkshop.repositories.CarRepository;
+import com.github.MrPatronO.carworkshop.services.interfaces.CarInterface;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CarService {
+public class CarService implements CarInterface {
 
     final CarRepository carRepository;
 
@@ -16,12 +17,19 @@ public class CarService {
         this.carRepository = carRepository;
     }
 
-    public List<Car> findAll(Car car) {
-        return carRepository.findAll(car);
-    }
 
     public Car save(Car car) {
         return carRepository.save(car);
+    }
+
+    @Override
+    public ResponseEntity<Car> findAll() {
+        return null;
+    }
+
+    @Override
+    public void deleteById(int carId) {
+
     }
 
     public Optional<Car> findById(Integer integer) {
@@ -35,4 +43,6 @@ public class CarService {
     public boolean existsByCarId(Integer integer) {
         return carRepository.existsById(integer);
     }
+
+
 }

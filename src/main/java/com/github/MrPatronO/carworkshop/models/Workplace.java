@@ -1,4 +1,4 @@
-package com.github.MrPatronO.carworkshop.model;
+package com.github.MrPatronO.carworkshop.models;
 
 import jakarta.persistence.*;
 
@@ -21,7 +21,7 @@ public class Workplace {
         return workplaceId;
     }
 
-    void setWorkplaceId(int workplaceId) {
+    public void setWorkplaceId(int workplaceId) {
         this.workplaceId = workplaceId;
     }
 
@@ -29,7 +29,7 @@ public class Workplace {
         return type;
     }
 
-    void setType(String type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -37,7 +37,7 @@ public class Workplace {
         return description;
     }
 
-    void setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 }

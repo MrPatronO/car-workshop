@@ -1,9 +1,11 @@
-package com.github.MrPatronO.carworkshop.repository;
+package com.github.MrPatronO.carworkshop.repositories;
 
-import com.github.MrPatronO.carworkshop.model.Client;
+import com.github.MrPatronO.carworkshop.models.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Integer> {
+
+    boolean existsById(int clientId);
 }
