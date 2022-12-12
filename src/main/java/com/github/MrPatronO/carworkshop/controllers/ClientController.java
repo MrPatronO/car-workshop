@@ -1,5 +1,7 @@
 package com.github.MrPatronO.carworkshop.controllers;
 
+import com.github.MrPatronO.carworkshop.dtos.ClientDto;
+import com.github.MrPatronO.carworkshop.dtos.NewClientDto;
 import com.github.MrPatronO.carworkshop.models.Client;
 import com.github.MrPatronO.carworkshop.services.ClientService;
 import org.slf4j.Logger;
@@ -29,9 +31,9 @@ class ClientController {
     }
 
     @PostMapping
-    Client newClient(@RequestBody @Validated Client newClient) {
+    ClientDto newClient(@RequestBody @Validated NewClientDto newClientDto) {
 
-        return  clientService.save(newClient);
+        return  clientService.save(newClientDto);
     }
 
     @GetMapping("/{id}")
@@ -42,22 +44,8 @@ class ClientController {
     }
 
     @PutMapping("/{id}")
-    Client updateClient(@PathVariable int clientId, @RequestBody @Validated Client newClient) {
-        return clientService.findById(clientId)
-                .map(client -> {
-                    client.setName(newClient.getName());
-                    client.setAddress(newClient.getAddress());
-                    client.setEmail(newClient.getEmail());
-                    client.setPhoneNumber(newClient.getPhoneNumber());
-                    client.setNip(newClient.getNip());
-
-                    return clientService.save(client);
-                })
-                .orElseGet(() -> {
-                    newClient.setClientId(clientId);
-                    return clientService.save(newClient);
-                })  ;
-
+    ResponseEntity<ClientDto> updateClient(@PathVariable Integer id, @RequestBody @Validated ClientDto clientDto) {
+        return ResponseEntity.ok(clientService.update(clientDto, id));
     }
 
     @DeleteMapping("/{id}")

@@ -1,26 +1,15 @@
 package com.github.MrPatronO.carworkshop.dtos;
 
-import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDateTime;
 
-public class TimetableDto {
+public class NewTimetableDto {
 
-    private int timetableId;
-    @NotBlank(message = "Workplace id may not be blank")
     private int workplace;
-    @NotBlank(message = "Start of repair may not be blank")
+
     private LocalDateTime startOfRepair;
-    @NotBlank(message = "End of repair not be blank")
+
     private LocalDateTime endOfRepair;
-
-    public int getTimetableId() {
-        return timetableId;
-    }
-
-    public void setTimetableId(int timetableId) {
-        this.timetableId = timetableId;
-    }
 
     public int getWorkplace() {
         return workplace;
@@ -34,7 +23,7 @@ public class TimetableDto {
         return startOfRepair;
     }
 
-    public void setStartOfRepair(LocalDateTime startOfRepair) {
+   public void setStartOfRepair(LocalDateTime startOfRepair) {
         this.startOfRepair = startOfRepair;
     }
 

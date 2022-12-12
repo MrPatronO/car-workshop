@@ -3,10 +3,11 @@ package com.github.MrPatronO.carworkshop.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Car {
+public class Car{
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +22,10 @@ public class Car {
         private double engine;
         @Column(nullable = false)
         private String typeFuel;
+
+        @OneToMany(mappedBy = "car")
+        private List<Repair> repairs;
+
 
     public Car() {
     }

@@ -1,5 +1,7 @@
 package com.github.MrPatronO.carworkshop.controllers;
 
+import com.github.MrPatronO.carworkshop.dtos.CarDto;
+import com.github.MrPatronO.carworkshop.dtos.NewCarDto;
 import com.github.MrPatronO.carworkshop.models.Car;
 import com.github.MrPatronO.carworkshop.services.CarService;
 import org.slf4j.Logger;
@@ -23,44 +25,31 @@ class CarController {
     }
 
     @GetMapping
-    ResponseEntity<Car> readCars(@PathVariable int carId) {
+    ResponseEntity<Car> readCars(Integer carId) {
 
         return carService.findAll();
     }
 
     @PostMapping
-    Car newCar(@RequestBody @Validated Car newCar) {
+    CarDto newCar(@RequestBody @Validated NewCarDto newCarDto) {
 
-        return  carService.save(newCar);
+        return  carService.save(newCarDto);
     }
 
     @GetMapping("/{id}")
-    Car readIdCars(@PathVariable int carId) {
+    Car readIdCars(Integer carId) {
 
         return carService.findById(carId)
                 .orElseThrow();
     }
 
     @PutMapping("/{id}")
-    Car updateCar(@PathVariable int carId, @RequestBody @Validated Car newCar) {
-        return carService.findById(carId)
-                .map(car -> {
-                    car.setBrand(newCar.getBrand());
-                    car.setEngine(newCar.getEngine());
-                    car.setModel(newCar.getModel());
-                    car.setVintage(newCar.getVintage());
-                    car.setTypeFuel(newCar.getTypeFuel());
-                    return carService.save(car);
-                })
-                .orElseGet(() -> {
-                    newCar.setCarId(carId);
-                    return carService.save(newCar);
-                })  ;
-
+    ResponseEntity<CarDto> updateCar(@PathVariable Integer id,@RequestBody @Validated CarDto carDto) {
+        return ResponseEntity.ok(carService.update(carDto, id));
     }
 
     @DeleteMapping("/{id}")
-    void deleteCar(@PathVariable int carId) {
+    void deleteCar(Integer carId) {
         carService.deleteById(carId);
     }
 

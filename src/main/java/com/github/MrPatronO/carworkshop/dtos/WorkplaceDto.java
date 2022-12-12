@@ -3,7 +3,7 @@ package com.github.MrPatronO.carworkshop.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 
-class WorkplaceDto {
+public class WorkplaceDto {
 
     private int workplaceId;
     @NotBlank(message = "Type may not be blank")

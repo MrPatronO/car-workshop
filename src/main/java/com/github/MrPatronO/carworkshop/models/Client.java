@@ -3,6 +3,7 @@ package com.github.MrPatronO.carworkshop.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -21,6 +22,9 @@ public class Client {
     private String nip;
     @Column(nullable = false)
     private String address;
+
+    @OneToMany(mappedBy = "client")
+    private List<Repair> repairs;
 
     public Client() {
     }

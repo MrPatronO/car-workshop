@@ -1,5 +1,7 @@
 package com.github.MrPatronO.carworkshop.controllers;
 
+import com.github.MrPatronO.carworkshop.dtos.NewWorkplaceDto;
+import com.github.MrPatronO.carworkshop.dtos.WorkplaceDto;
 import com.github.MrPatronO.carworkshop.models.Workplace;
 import com.github.MrPatronO.carworkshop.services.WorkplaceService;
 import org.slf4j.Logger;
@@ -8,13 +10,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/workplaces")
 class WorkplaceController {
 
     private final WorkplaceService workplaceService;
 
-    public static final Logger logger = LoggerFactory.getLogger(CarController.class);
+    private static final Logger logger = LoggerFactory.getLogger(WorkplaceController.class);
 
     WorkplaceController(WorkplaceService workplaceService) {
         this.workplaceService = workplaceService;
@@ -22,42 +26,31 @@ class WorkplaceController {
 
 
     @GetMapping
-    ResponseEntity<Workplace> readWorkplacess(@PathVariable int workplaceId) {
+    ResponseEntity<List<Workplace>> readWorkplaces() {
 
-        return workplaceService.findAll();
+        return ResponseEntity.ok(workplaceService.findAll());
     }
 
     @PostMapping
-    Workplace newWorkplace(@RequestBody @Validated Workplace newWorkplace) {
+    WorkplaceDto newWorkplace(@RequestBody @Validated NewWorkplaceDto newWorkplaceDto) {
 
-        return  workplaceService.save(newWorkplace);
+        return  workplaceService.save(newWorkplaceDto);
     }
 
     @GetMapping("/{id}")
-    Workplace readIdWorkplaces(@PathVariable int workplaceId) {
+    Workplace readIdWorkplaces(Integer workplaceId) {
 
         return workplaceService.findById(workplaceId)
                 .orElseThrow();
     }
 
     @PutMapping("/{id}")
-    Workplace updateWorkplace(@PathVariable int workplaceId, @RequestBody @Validated Workplace newWorkplace) {
-        return workplaceService.findById(workplaceId)
-                .map(workplace -> {
-                    workplace.setDescription(newWorkplace.getDescription());
-                    workplace.setType(newWorkplace.getType());
-
-                    return workplaceService.save(workplace);
-                })
-                .orElseGet(() -> {
-                    newWorkplace.setWorkplaceId(workplaceId);
-                    return workplaceService.save(newWorkplace);
-                })  ;
-
+    ResponseEntity<WorkplaceDto> updateWorkplace(@PathVariable Integer id, @RequestBody @Validated WorkplaceDto workplaceDto) {
+        return ResponseEntity.ok(workplaceService.update(workplaceDto, id));
     }
 
     @DeleteMapping("/{id}")
-    void deleteWorkplace(@PathVariable int workplaceId) {
+    void deleteWorkplace(Integer workplaceId) {
         workplaceService.deleteById(workplaceId);
     }
 

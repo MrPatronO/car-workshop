@@ -1,5 +1,7 @@
 package com.github.MrPatronO.carworkshop.controllers;
 
+import com.github.MrPatronO.carworkshop.dtos.NewTimetableDto;
+import com.github.MrPatronO.carworkshop.dtos.TimetableDto;
 import com.github.MrPatronO.carworkshop.models.Timetable;
 import com.github.MrPatronO.carworkshop.services.TimetableService;
 import org.slf4j.Logger;
@@ -28,9 +30,9 @@ class TimetableController {
     }
 
     @PostMapping
-    Timetable newTimetable(@RequestBody @Validated Timetable newTimetable) {
+    TimetableDto newTimetable(@RequestBody @Validated NewTimetableDto newTimetableDto) {
 
-        return  timetableService.save(newTimetable);
+        return  timetableService.save(newTimetableDto);
     }
 
     @GetMapping("/{id}")
@@ -41,20 +43,8 @@ class TimetableController {
     }
 
     @PutMapping("/{id}")
-    Timetable updateTimetable(@PathVariable int timetableId, @RequestBody @Validated Timetable newTimetable) {
-        return timetableService.findById(timetableId)
-                .map(timetable -> {
-                    timetable.setEndOfRepair(newTimetable.getEndOfRepair());
-                    timetable.setWorkplace(newTimetable.getWorkplace());
-                    timetable.setStartOfRepair(newTimetable.getStartOfRepair());
-
-                    return timetableService.save(timetable);
-                })
-                .orElseGet(() -> {
-                    newTimetable.setTimetableId(timetableId);
-                    return timetableService.save(newTimetable);
-                })  ;
-
+    ResponseEntity<TimetableDto> updateTimetable(@PathVariable Integer id, @RequestBody @Validated TimetableDto timetableDto) {
+        return ResponseEntity.ok(timetableService.update(timetableDto, id));
     }
 
     @DeleteMapping("/{id}")

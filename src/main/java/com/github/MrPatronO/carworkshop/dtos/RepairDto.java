@@ -1,31 +1,37 @@
 package com.github.MrPatronO.carworkshop.dtos;
 
+import com.github.MrPatronO.carworkshop.models.Car;
+import com.github.MrPatronO.carworkshop.models.Client;
+import com.github.MrPatronO.carworkshop.models.Timetable;
+import com.github.MrPatronO.carworkshop.models.Workplace;
 import jakarta.validation.constraints.NotBlank;
 
-class OrderDto {
+import java.math.BigDecimal;
 
-    private int orderId;
+public class RepairDto {
+
+    private int repairId;
     @NotBlank(message = "Description number may not be blank")
     private String description;
     @NotBlank(message = "Client id may not be blank")
-    private int client;
+    private Client client;
     @NotBlank(message = "Car id may not be blank")
-    private int car;
+    private Car car;
     @NotBlank(message = "Price may not be blank")
-    private double price;
+    private BigDecimal price;      //zmienić w pozostałych
     @NotBlank(message = "Stand number may not be blank")
-    private int stand;
+    private Workplace stand;
     @NotBlank(message = "Status may not be blank")
     private String status;
     @NotBlank(message = "Timetable may not be blank")
-    private int timetable;
+    private Timetable timetable;
 
-    public int getOrderId() {
-        return orderId;
+    public int getRepairId() {
+        return repairId;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public void setRepairId(int orderId) {
+        this.repairId = repairId;
     }
 
     public String getDescription() {
@@ -36,51 +42,51 @@ class OrderDto {
         this.description = description;
     }
 
-    public int getClient() {
+    public Client getClient() {
         return client;
     }
 
-    public void setClient(int client) {
+    public void setClient(Client client) {
         this.client = client;
     }
 
-    public int getCar() {
+    public Car getCar() {
         return car;
     }
 
-    public void setCar(int car) {
+    public void setCar(Car car) {
         this.car = car;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public int getStand() {
+    public Workplace getStand() {
         return stand;
     }
 
-    public void setStand(int stand) {
+    public void setStand(Workplace stand) {
         this.stand = stand;
     }
 
-    public String getStatus() {
+    public Enum getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Enum status) {
         this.status = status;
     }
 
-    public int getTimetable() {
+    public Timetable getTimetable() {
         return timetable;
     }
 
-    public void setTimetable(int timetable) {
+    public void setTimetable(Timetable timetable) {
         this.timetable = timetable;
     }
 }

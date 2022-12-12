@@ -3,6 +3,7 @@ package com.github.MrPatronO.carworkshop.models;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -11,12 +12,18 @@ public class Timetable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int timetableId;
+
     @Column(nullable = false)
     private int workplace;
+
     @Column(nullable = false)
     private LocalDateTime startOfRepair;
+
     @Column(nullable = false)
     private LocalDateTime endOfRepair;
+
+    @OneToOne(mappedBy = "timetable")
+    private List<Repair> repairs;
 
     public Timetable() {
     }
