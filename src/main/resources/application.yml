@@ -4,10 +4,10 @@ spring:
     username: postgres
     password: asdf1234
     platform: 'org.hibernate.dialect.PostgreSQLDialect'
+
   jpa:
     hibernate:
       ddl-auto: validate
     properties:
       hibernate:
         default_schema: car_workshop
-

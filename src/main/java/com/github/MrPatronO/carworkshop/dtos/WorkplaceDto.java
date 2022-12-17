@@ -5,17 +5,17 @@ import jakarta.validation.constraints.NotBlank;
 
 public class WorkplaceDto {
 
-    private int workplaceId;
+    private Long workplaceId;
     @NotBlank(message = "Type may not be blank")
     private String type;
     @NotBlank(message = "Description may not be blank")
     private String description;
 
-    public int getWorkplaceId() {
+    public Long getWorkplaceId() {
         return workplaceId;
     }
 
-    public void setWorkplaceId(int workplaceId) {
+    public void setWorkplaceId(Long workplaceId) {
         this.workplaceId = workplaceId;
     }
 

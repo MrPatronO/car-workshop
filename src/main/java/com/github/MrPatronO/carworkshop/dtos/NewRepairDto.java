@@ -4,7 +4,6 @@ package com.github.MrPatronO.carworkshop.dtos;
 import com.github.MrPatronO.carworkshop.models.Car;
 import com.github.MrPatronO.carworkshop.models.Client;
 import com.github.MrPatronO.carworkshop.models.Timetable;
-import com.github.MrPatronO.carworkshop.models.Workplace;
 
 import java.math.BigDecimal;
 
@@ -12,15 +11,15 @@ public class NewRepairDto {
 
     private String description;
 
-    private Client client;
+    private Long clientId;
 
-    private Car car;
+    private Long carId;
 
     private BigDecimal price;
 
-    private Workplace stand;
+    private Long workplaceId;
 
-    private Timetable timetable;
+    private Long timetableId;
 
     public String getDescription() {
         return description;
@@ -30,20 +29,20 @@ public class NewRepairDto {
         this.description = description;
     }
 
-    public Client getClient() {
-        return client;
+    public Long getClientId() {
+        return clientId;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setClientId(Long clientId) {
+        this.clientId = clientId;
     }
 
-    public Car getCar() {
-        return car;
+    public Long getCarId() {
+        return carId;
     }
 
-    public void setCar(Car car) {
-        this.car = car;
+    public void setCarId(Long carId) {
+        this.carId = carId;
     }
 
     public BigDecimal getPrice() {
@@ -54,19 +53,19 @@ public class NewRepairDto {
         this.price = price;
     }
 
-    public Workplace getStand() {
-        return stand;
+    public Long getWorkplaceId() {
+        return workplaceId;
     }
 
-    public void setStand(Workplace stand) {
-        this.stand = stand;
+    public void setWorkplaceId(Long workplaceId) {
+        this.workplaceId = workplaceId;
     }
 
-    public Timetable getTimetable() {
-        return timetable;
+    public Long getTimetableId() {
+        return timetableId;
     }
 
-    public void setTimetable(Timetable timetable) {
-        this.timetable = timetable;
+    public void setTimetableId(Long timetableId) {
+        this.timetableId = timetableId;
     }
 }

@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 public class CarDto {
 
 
-    private int carId;
+    private Long carId;
     @NotBlank(message = "Brand may not be blank")
     private String brand;
     @NotBlank(message = "Model may not be blank")
@@ -18,11 +18,11 @@ public class CarDto {
     @NotBlank(message = "Type Fuel may not be blank")
     private String typeFuel;
 
-    public int getCarId() {
+    public Long getCarId() {
         return carId;
     }
 
-    public void setCarId(int carId) {
+    public void setCarId(Long carId) {
         this.carId = carId;
     }
 

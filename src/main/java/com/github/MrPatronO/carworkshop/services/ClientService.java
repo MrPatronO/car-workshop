@@ -2,6 +2,7 @@ package com.github.MrPatronO.carworkshop.services;
 
 import com.github.MrPatronO.carworkshop.dtos.ClientDto;
 import com.github.MrPatronO.carworkshop.dtos.NewClientDto;
+import com.github.MrPatronO.carworkshop.models.Car;
 import com.github.MrPatronO.carworkshop.models.Client;
 import com.github.MrPatronO.carworkshop.repositories.ClientRepository;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,11 @@ public class ClientService {
     ClientService(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
     }
+
+    public Optional<Client> findById(Integer clientId) {
+        return clientRepository.findById(clientId);
+    }
+
 
     public ClientDto save(NewClientDto newClientDto) {
         Client client = new Client();
@@ -48,16 +54,7 @@ public class ClientService {
     public void deleteById(int clientId) {
     }
 
-    public Optional<Client> findById(Integer clientId) {
-        return clientRepository.findById(clientId);
-    }
 
-    public void delete(Client client) {
-        clientRepository.delete(client);
-    }
-    public boolean exists(Integer clientId) {
-        return clientRepository.existsById(clientId);
-    }
 
     public ClientDto update(ClientDto clientDto, Integer clientId) {
         Client updatedOrCreatedClient = clientRepository.findById(clientId)

@@ -10,27 +10,23 @@ import java.math.BigDecimal;
 
 public class RepairDto {
 
-    private int repairId;
+    private Long repairId;
     @NotBlank(message = "Description number may not be blank")
     private String description;
-    @NotBlank(message = "Client id may not be blank")
-    private Client client;
-    @NotBlank(message = "Car id may not be blank")
-    private Car car;
+    private Client clientId;
+    private Car carId;
     @NotBlank(message = "Price may not be blank")
-    private BigDecimal price;      //zmienić w pozostałych
-    @NotBlank(message = "Stand number may not be blank")
-    private Workplace stand;
-    @NotBlank(message = "Status may not be blank")
-    private String status;
-    @NotBlank(message = "Timetable may not be blank")
-    private Timetable timetable;
+    private BigDecimal price;
+    private Workplace workplaceId;
 
-    public int getRepairId() {
+    private Enum status;
+    private Timetable timetableId;
+
+    public Long getRepairId() {
         return repairId;
     }
 
-    public void setRepairId(int orderId) {
+    public void setRepairId(Long repairId) {
         this.repairId = repairId;
     }
 
@@ -42,36 +38,12 @@ public class RepairDto {
         this.description = description;
     }
 
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public Car getCar() {
-        return car;
-    }
-
-    public void setCar(Car car) {
-        this.car = car;
-    }
-
     public BigDecimal getPrice() {
         return price;
     }
 
     public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    public Workplace getStand() {
-        return stand;
-    }
-
-    public void setStand(Workplace stand) {
-        this.stand = stand;
     }
 
     public Enum getStatus() {
@@ -82,11 +54,36 @@ public class RepairDto {
         this.status = status;
     }
 
-    public Timetable getTimetable() {
-        return timetable;
+    public Client getClientId() {
+        return clientId;
     }
 
-    public void setTimetable(Timetable timetable) {
-        this.timetable = timetable;
+    public void setClientId(Client clientId) {
+        this.clientId = clientId;
     }
+
+    public Car getCarId() {
+        return carId;
+    }
+
+    public void setCarId(Car carId) {
+        this.carId = carId;
+    }
+
+    public Workplace getWorkplaceId() {
+        return workplaceId;
+    }
+
+    public void setWorkplaceId(Workplace workplaceId) {
+        this.workplaceId = workplaceId;
+    }
+
+    public Timetable getTimetableId() {
+        return timetableId;
+    }
+
+    public void setTimetableId(Timetable timetableId) {
+        this.timetableId = timetableId;
+    }
+
 }

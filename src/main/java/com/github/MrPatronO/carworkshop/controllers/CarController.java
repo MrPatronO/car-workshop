@@ -24,6 +24,7 @@ class CarController {
         this.carService = carService;
     }
 
+
     @GetMapping
     ResponseEntity<Car> readCars(Integer carId) {
 
@@ -49,8 +50,8 @@ class CarController {
     }
 
     @DeleteMapping("/{id}")
-    void deleteCar(Integer carId) {
-        carService.deleteById(carId);
+    void deleteCar(Integer id) {
+        carService.deleteById(id);
     }
 
 }

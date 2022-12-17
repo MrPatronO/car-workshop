@@ -19,12 +19,12 @@ public class ClientDto {
     @NotBlank(message = "Address may not be blank")
     private String address;
 
-    public int getClientId() {
+    public long getClientId() {
         return clientId;
     }
 
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
+    public void setClientId(Long clientId) {
+        this.clientId = Math.toIntExact(clientId);
     }
 
     public String getName() {

@@ -31,9 +31,9 @@ class RepairController {
     }
 
     @PostMapping
-    RepairDto newRepair(@RequestBody @Validated NewRepairDto newRepairDto) {
+    RepairDto newRepair(@RequestBody @Validated NewRepairDto newRepairDto, Integer clientId, Integer carId, Integer workplaceId, Integer timetableId) {
 
-        return  repairService.save(newRepairDto);
+        return  repairService.save(newRepairDto, clientId, carId, workplaceId, timetableId);
     }
 
 

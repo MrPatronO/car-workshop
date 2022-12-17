@@ -3,7 +3,7 @@ package com.github.MrPatronO.carworkshop.models;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
+
 import java.util.Objects;
 
 @Entity
@@ -11,7 +11,7 @@ public class Timetable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int timetableId;
+    private Long timetableId;
 
     @Column(nullable = false)
     private int workplace;
@@ -23,23 +23,25 @@ public class Timetable {
     private LocalDateTime endOfRepair;
 
     @OneToOne(mappedBy = "timetable")
-    private List<Repair> repairs;
+    private Repair repairs;
 
     public Timetable() {
     }
 
-    Timetable(int timetableId, int workplace, LocalDateTime startOfRepair, LocalDateTime endOfRepair) {
+
+    Timetable(Long timetableId, int workplace, LocalDateTime startOfRepair, LocalDateTime endOfRepair, Repair repairs) {
         this.timetableId = timetableId;
         this.workplace = workplace;
         this.startOfRepair = startOfRepair;
         this.endOfRepair = endOfRepair;
+        this.repairs = repairs;
     }
 
-    public int getTimetableId() {
+    public Long getTimetableId() {
         return timetableId;
     }
 
-    public void setTimetableId(int timetableId) {
+    public void setTimetableId(Long timetableId) {
         this.timetableId = timetableId;
     }
 
@@ -72,12 +74,12 @@ public class Timetable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Timetable timetable = (Timetable) o;
-        return timetableId == timetable.timetableId && workplace == timetable.workplace && startOfRepair.equals(timetable.startOfRepair) && endOfRepair.equals(timetable.endOfRepair);
+        return timetableId == timetable.timetableId && workplace == timetable.workplace && startOfRepair.equals(timetable.startOfRepair) && endOfRepair.equals(timetable.endOfRepair) && repairs.equals(timetable.repairs);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.timetableId, this.workplace, this.startOfRepair, this.endOfRepair);
+        return Objects.hash(timetableId, workplace, startOfRepair, endOfRepair, repairs);
     }
 
     @Override
@@ -87,6 +89,7 @@ public class Timetable {
                 ", workplace=" + workplace +
                 ", startOfRepair=" + startOfRepair +
                 ", endOfRepair=" + endOfRepair +
+                ", repairs=" + repairs +
                 '}';
     }
 }

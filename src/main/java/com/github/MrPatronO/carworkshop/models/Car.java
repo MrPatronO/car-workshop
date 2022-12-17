@@ -3,15 +3,17 @@ package com.github.MrPatronO.carworkshop.models;
 
 import jakarta.persistence.*;
 
+
 import java.util.List;
 import java.util.Objects;
+
 
 @Entity
 public class Car{
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private int carId;
+        private Long carId;
         @Column(nullable = false)
         private String brand;
         @Column(nullable = false)
@@ -26,24 +28,25 @@ public class Car{
         @OneToMany(mappedBy = "car")
         private List<Repair> repairs;
 
-
     public Car() {
     }
 
-    Car(int carId, String brand, String model, int vintage, double engine, String typeFuel) {
+    Car(Long carId, String brand, String model, int vintage, double engine, String typeFuel, List<Repair> repairs) {
         this.carId = carId;
         this.brand = brand;
         this.model = model;
         this.vintage = vintage;
         this.engine = engine;
         this.typeFuel = typeFuel;
+        this.repairs = repairs;
     }
 
-    public int getCarId() {
-            return carId;
+
+    public Long getCarId() {
+            return carId ;
         }
 
-        public void setCarId(int carId) {
+        public void setCarId(Long carId) {
             this.carId = carId;
         }
 

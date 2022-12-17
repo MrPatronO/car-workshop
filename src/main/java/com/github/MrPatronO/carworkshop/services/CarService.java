@@ -12,13 +12,14 @@ import java.util.Optional;
 @Service
 public class CarService {
 
-    final CarRepository carRepository;
+    private final CarRepository carRepository;
 
     CarService(CarRepository carRepository) {
         this.carRepository = carRepository;
     }
 
     public CarDto save(NewCarDto newCarDto) {
+
         Car car = new Car();
             car.setVintage(newCarDto.getVintage());
             car.setTypeFuel(newCarDto.getTypeFuel());
@@ -44,21 +45,10 @@ public class CarService {
         return null;
     }
 
-    public ResponseEntity<Object> deleteById(Integer carId) {
-        return ResponseEntity.ok(carRepository.delete(carId));
+    public Optional<Car> findById(Integer carId) {
+        return carRepository.findById(carId);
     }
 
-    public Optional<Car> findById(Integer integer) {
-        return carRepository.findById(integer);
-    }
-
-    public void delete(Car car) {
-        carRepository.delete(car);
-    }
-
-    public boolean exists(Integer carId) {
-        return carRepository.existsById(carId);
-    }
 
     public CarDto update(CarDto carDto, Integer carId) {
         Car updatedOrCreatedCar = carRepository.findById(carId)
@@ -92,4 +82,6 @@ public class CarService {
         return newCarDto;
     }
 
+    public void deleteById(Integer id) {
+    }
 }

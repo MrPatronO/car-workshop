@@ -38,16 +38,8 @@ public class TimetableService{
 
 
 
-    public Optional<Timetable> findById(Integer integer) {
-        return timetableRepository.findById(integer);
-    }
-
-    public void delete(Timetable timetable) {
-        timetableRepository.delete(timetable);
-    }
-
-    public boolean existsById(Integer integer) {
-        return timetableRepository.existsById(integer);
+    public Optional<Timetable> findById(Integer timetableId) {
+        return timetableRepository.findById(timetableId);
     }
 
     public ResponseEntity<Timetable> findAll() {

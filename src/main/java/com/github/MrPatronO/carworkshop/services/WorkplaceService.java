@@ -18,6 +18,7 @@ public class WorkplaceService {
         this.workplaceRepository = workplaceRepository;
     }
 
+
     public WorkplaceDto save(NewWorkplaceDto newWorkplaceDto) {
         Workplace workplace = new Workplace();
         workplace.setType(newWorkplaceDto.getType());
@@ -33,7 +34,6 @@ public class WorkplaceService {
         return workplaceDto;
     }
 
-
     public List<Workplace> findAll(){
         return workplaceRepository.findAll();
     };
@@ -42,16 +42,8 @@ public class WorkplaceService {
         workplaceRepository.deleteById(workplaceId);
     }
 
-    public Optional<Workplace> findById(Integer integer) {
-        return workplaceRepository.findById(integer);
-    }
-
-    public void delete(Workplace workplace) {
-        workplaceRepository.delete(workplace);
-    }
-
-    public boolean exists(Integer workplaceId) {
-        return workplaceRepository.existsById(workplaceId);
+    public Optional<Workplace> findById(Integer workplaceId) {
+        return workplaceRepository.findById(workplaceId);
     }
 
     public WorkplaceDto update(WorkplaceDto workplaceDto, Integer workplaceId) {

@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 public class TimetableDto {
 
-    private int timetableId;
+    private Long timetableId;
     @NotBlank(message = "Workplace id may not be blank")
     private int workplace;
     @NotBlank(message = "Start of repair may not be blank")
@@ -14,11 +14,11 @@ public class TimetableDto {
     @NotBlank(message = "End of repair not be blank")
     private LocalDateTime endOfRepair;
 
-    public int getTimetableId() {
+    public Long getTimetableId() {
         return timetableId;
     }
 
-    public void setTimetableId(int timetableId) {
+    public void setTimetableId(Long timetableId) {
         this.timetableId = timetableId;
     }
 

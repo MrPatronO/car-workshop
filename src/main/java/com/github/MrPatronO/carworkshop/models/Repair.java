@@ -9,37 +9,31 @@ public class Repair {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int repairId;
+    private Long repairId;
 
     @Column(nullable = false)
     private String description;
 
-    @Column(nullable = false)
     @ManyToOne()
-    @JoinColumn(name = "client_id")
+    @JoinColumn(name = "client")
     private Client client;
 
-    @Column(nullable = false)
     @ManyToOne()
-    @JoinColumn(name = "car_id")
+    @JoinColumn(name = "car")
     private Car car;
 
     @Column(nullable = false)
     private BigDecimal price;
 
-    @Column(nullable = false)
-    @OneToOne()
-    @JoinColumn(name = "workplace_id")
-    private Workplace stand;
-    /*
-    zamienić na Enum, w bazie jako String
-     */
-    @Column(nullable = false)
+    @ManyToOne()
+    @JoinColumn(name = "workplace")
+    private Workplace workplace;
+
+    @Transient
     private Enum status;
 
     @OneToOne()
-    @JoinColumn(name = "timetable_id")
-    @Column(nullable = false)
+    @JoinColumn(name = "timetable")
     private Timetable timetable;
 
 
@@ -47,22 +41,22 @@ public class Repair {
     }
 
 
-    Repair(int repairId, String description, Client client, Car car, BigDecimal price, Workplace stand, Enum status, Timetable timetable) {
+    Repair(Long repairId, String description, Client client, Car car, BigDecimal price, Workplace workplace, Enum status, Timetable timetable) {
         this.repairId = repairId;
         this.description = description;
         this.client = client;
         this.car = car;
         this.price = price;
-        this.stand = stand;
+        this.workplace = workplace;
         this.status = status;
         this.timetable = timetable;
     }
 
-    public int getRepairId() {
+    public Long getRepairId() {
         return repairId;
     }
 
-    public void setRepairId(int orderId) {
+    public void setRepairId(Long repairId) {
         this.repairId = repairId;
     }
 
@@ -98,12 +92,12 @@ public class Repair {
         this.price = price;
     }
 
-    public Workplace getStand() {
-        return stand;
+    public Workplace getWorkplace() {
+        return workplace;
     }
 
-    public void setStand(Workplace stand) {
-        this.stand = stand;
+    public void setWorkplace(Workplace workplace) {
+        this.workplace = workplace;
     }
 
     public Enum getStatus() {
@@ -121,4 +115,5 @@ public class Repair {
     public void setTimetable(Timetable timetable) {
         this.timetable = timetable;
     }
+
 }

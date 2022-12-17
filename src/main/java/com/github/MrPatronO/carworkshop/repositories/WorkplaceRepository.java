@@ -7,5 +7,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface WorkplaceRepository extends JpaRepository<Workplace, Integer> {
 
-    boolean existsById(int workplaceId);
 }

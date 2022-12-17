@@ -11,14 +11,14 @@ public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int clientId;
+    private Long clientId;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
     private String email;
     @Column(nullable = false)
     private int phoneNumber;
-    @Column(nullable = false)
+
     private String nip;
     @Column(nullable = false)
     private String address;
@@ -29,20 +29,22 @@ public class Client {
     public Client() {
     }
 
-    Client(int clientId, String name, String email, int phoneNumber, String nip, String address) {
+    Client(Long clientId, String name, String email, int phoneNumber, String nip, String address, List<Repair> repairs) {
         this.clientId = clientId;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.nip = nip;
         this.address = address;
+        this.repairs = repairs;
     }
 
-    public int getClientId() {
+
+    public Long getClientId() {
         return clientId;
     }
 
-    public void setClientId(int clientId) {
+    public void setClientId(Long clientId) {
         this.clientId = clientId;
     }
 
