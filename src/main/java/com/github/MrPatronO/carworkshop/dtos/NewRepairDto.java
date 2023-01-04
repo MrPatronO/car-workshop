@@ -1,10 +1,5 @@
 package com.github.MrPatronO.carworkshop.dtos;
 
-
-import com.github.MrPatronO.carworkshop.models.Car;
-import com.github.MrPatronO.carworkshop.models.Client;
-import com.github.MrPatronO.carworkshop.models.Timetable;
-
 import java.math.BigDecimal;
 
 public class NewRepairDto {

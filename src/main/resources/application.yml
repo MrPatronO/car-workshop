@@ -4,6 +4,9 @@ spring:
     username: postgres
     password: asdf1234
     platform: 'org.hibernate.dialect.PostgreSQLDialect'
+  output:
+    ansi:
+      enabled: always
 
   jpa:
     hibernate:
@@ -11,3 +14,4 @@ spring:
     properties:
       hibernate:
         default_schema: car_workshop
+

@@ -38,9 +38,9 @@ class RepairController {
 
 
     @GetMapping("/{id}")
-    Repair readIdOrders(Integer orderId) {
+    Repair readIdOrders(Integer repairId) {
 
-        return repairService.findById(orderId)
+        return repairService.findById(repairId)
                 .orElseThrow();
     }
 
@@ -50,7 +50,7 @@ class RepairController {
     }
 
     @DeleteMapping("/{id}")
-    void deleteOrder(Integer orderId) {
-        repairService.deleteById(orderId);
+    void deleteOrder(Integer repairId) {
+        repairService.deleteById(repairId);
     }
 }

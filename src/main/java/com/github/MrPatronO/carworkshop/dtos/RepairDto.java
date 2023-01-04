@@ -19,7 +19,7 @@ public class RepairDto {
     private BigDecimal price;
     private Workplace workplaceId;
 
-    private Enum status;
+
     private Timetable timetableId;
 
     public Long getRepairId() {
@@ -44,14 +44,6 @@ public class RepairDto {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    public Enum getStatus() {
-        return status;
-    }
-
-    public void setStatus(Enum status) {
-        this.status = status;
     }
 
     public Client getClientId() {

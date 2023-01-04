@@ -8,31 +8,28 @@ import java.math.BigDecimal;
 public class Repair {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long repairId;
 
     @Column(nullable = false)
     private String description;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "client")
     private Client client;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "car")
     private Car car;
 
     @Column(nullable = false)
     private BigDecimal price;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "workplace")
     private Workplace workplace;
 
-    @Transient
-    private Enum status;
-
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "timetable")
     private Timetable timetable;
 
@@ -41,14 +38,13 @@ public class Repair {
     }
 
 
-    Repair(Long repairId, String description, Client client, Car car, BigDecimal price, Workplace workplace, Enum status, Timetable timetable) {
+    Repair(Long repairId, String description, Client client, Car car, BigDecimal price, Workplace workplace,Timetable timetable) {
         this.repairId = repairId;
         this.description = description;
         this.client = client;
         this.car = car;
         this.price = price;
         this.workplace = workplace;
-        this.status = status;
         this.timetable = timetable;
     }
 
@@ -98,14 +94,6 @@ public class Repair {
 
     public void setWorkplace(Workplace workplace) {
         this.workplace = workplace;
-    }
-
-    public Enum getStatus() {
-        return status;
-    }
-
-    public void setStatus(Enum status) {
-        this.status = status;
     }
 
     public Timetable getTimetable() {

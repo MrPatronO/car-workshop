@@ -1,7 +1,6 @@
 package com.github.MrPatronO.carworkshop.models;
 
 import jakarta.persistence.*;
-import lombok.ToString;
 
 import java.util.List;
 
