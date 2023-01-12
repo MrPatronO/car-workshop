@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/repairs")
 class RepairController {
@@ -25,32 +27,32 @@ class RepairController {
     }
 
     @GetMapping
-    ResponseEntity<Repair> readRepair(Repair repairId) {
+    List<Repair> readRepair(Repair repairId) {
 
         return repairService.findAll(repairId);
     }
 
     @PostMapping
-    RepairDto newRepair(@RequestBody @Validated NewRepairDto newRepairDto, Integer clientId, Integer carId, Integer workplaceId, Integer timetableId) {
+    RepairDto newRepair(@RequestBody @Validated NewRepairDto newRepairDto) {
 
-        return  repairService.save(newRepairDto, clientId, carId, workplaceId, timetableId);
+        return  repairService.save(newRepairDto);
     }
 
 
     @GetMapping("/{id}")
-    Repair readIdOrders(Integer repairId) {
+    Repair readIdOrders(@PathVariable("id") Long id) {
 
-        return repairService.findById(repairId)
+        return repairService.findById(id)
                 .orElseThrow();
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<RepairDto> updateRepair(@PathVariable Integer id, @RequestBody @Validated RepairDto repairDto) {
+    ResponseEntity<RepairDto> updateRepair(@PathVariable("id") Long id, @RequestBody @Validated RepairDto repairDto) {
         return ResponseEntity.ok(repairService.update(repairDto, id));
     }
 
     @DeleteMapping("/{id}")
-    void deleteOrder(Integer repairId) {
-        repairService.deleteById(repairId);
+    void deleteOrder(@PathVariable("id") Long id) {
+        repairService.deleteById(id);
     }
 }

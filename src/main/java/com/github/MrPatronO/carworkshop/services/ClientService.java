@@ -2,12 +2,12 @@ package com.github.MrPatronO.carworkshop.services;
 
 import com.github.MrPatronO.carworkshop.dtos.ClientDto;
 import com.github.MrPatronO.carworkshop.dtos.NewClientDto;
-import com.github.MrPatronO.carworkshop.models.Car;
 import com.github.MrPatronO.carworkshop.models.Client;
 import com.github.MrPatronO.carworkshop.repositories.ClientRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,7 +19,7 @@ public class ClientService {
         this.clientRepository = clientRepository;
     }
 
-    public Optional<Client> findById(Integer clientId) {
+    public Optional<Client> findById(Long clientId) {
         return clientRepository.findById(clientId);
     }
 
@@ -46,17 +46,18 @@ public class ClientService {
     }
 
 
-    public ResponseEntity<Client> findAll() {
-        return null;
+    public List<Client> findAll() {
+        return clientRepository.findAll();
     }
 
 
-    public void deleteById(int clientId) {
+    public void deleteById(Long id) {
+        clientRepository.deleteById(id);
     }
 
 
 
-    public ClientDto update(ClientDto clientDto, Integer clientId) {
+    public ClientDto update(ClientDto clientDto, Long clientId) {
         Client updatedOrCreatedClient = clientRepository.findById(clientId)
                 .map(client -> {
                     client.setNip(clientDto.getNip());

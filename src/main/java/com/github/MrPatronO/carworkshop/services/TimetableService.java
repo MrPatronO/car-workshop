@@ -7,6 +7,7 @@ import com.github.MrPatronO.carworkshop.repositories.TimetableRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,15 +39,15 @@ public class TimetableService{
 
 
 
-    public Optional<Timetable> findById(Integer timetableId) {
+    public Optional<Timetable> findById(Long timetableId) {
         return timetableRepository.findById(timetableId);
     }
 
-    public ResponseEntity<Timetable> findAll() {
-        return null;
+    public List<Timetable> findAll() {
+        return timetableRepository.findAll();
     }
 
-    public TimetableDto update(TimetableDto timetableDto, Integer timetableId) {
+    public TimetableDto update(TimetableDto timetableDto, Long timetableId) {
         Timetable updatedOrCreatedTimetable = timetableRepository.findById(timetableId)
                 .map(timetable -> {
                     timetable.setEndOfRepair(timetableDto.getEndOfRepair());
@@ -73,7 +74,7 @@ public class TimetableService{
         return newTimetableDto;
     }
 
-    public void deleteById(int timetableId) {
-
+    public void deleteById(Long id) {
+        timetableRepository.deleteById(id);
     }
 }

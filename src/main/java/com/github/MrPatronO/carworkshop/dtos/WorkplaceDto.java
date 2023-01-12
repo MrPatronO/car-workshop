@@ -1,14 +1,11 @@
 package com.github.MrPatronO.carworkshop.dtos;
 
-
-import jakarta.validation.constraints.NotBlank;
-
 public class WorkplaceDto {
 
     private Long workplaceId;
-    @NotBlank(message = "Type may not be blank")
+
     private String type;
-    @NotBlank(message = "Description may not be blank")
+
     private String description;
 
     public Long getWorkplaceId() {

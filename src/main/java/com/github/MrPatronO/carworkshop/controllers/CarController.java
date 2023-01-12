@@ -11,6 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/cars")
 class CarController {
@@ -24,9 +27,8 @@ class CarController {
         this.carService = carService;
     }
 
-
     @GetMapping
-    ResponseEntity<Car> readCars(Integer carId) {
+    List<Car> readCars(Long carId) {
 
         return carService.findAll();
     }
@@ -38,20 +40,21 @@ class CarController {
     }
 
     @GetMapping("/{id}")
-    Car readIdCars(Integer carId) {
+    @ResponseBody
+    Optional<Car> readIdCars(@PathVariable("id")  Long id) {
 
-        return carService.findById(carId)
-                .orElseThrow();
+        return carService.findById(id);
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<CarDto> updateCar(@PathVariable Integer id,@RequestBody @Validated CarDto carDto) {
+    ResponseEntity<CarDto> updateCar(@PathVariable("id") Long id,@RequestBody @Validated CarDto carDto) {
         return ResponseEntity.ok(carService.update(carDto, id));
     }
 
     @DeleteMapping("/{id}")
-    void deleteCar(Integer id) {
+    void deleteCar(@PathVariable("id")  Long id) {
         carService.deleteById(id);
     }
+
 
 }

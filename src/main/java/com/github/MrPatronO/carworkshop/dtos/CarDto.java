@@ -7,15 +7,15 @@ public class CarDto {
 
 
     private Long carId;
-    @NotBlank(message = "Brand may not be blank")
+
     private String brand;
-    @NotBlank(message = "Model may not be blank")
+
     private String model;
-    @NotBlank(message = "Vintage may not be blank")
+
     private int vintage;
-    @NotBlank(message = "Engine may not be blank")
+
     private double engine;
-    @NotBlank(message = "Type Fuel may not be blank")
+
     private String typeFuel;
 
     public Long getCarId() {

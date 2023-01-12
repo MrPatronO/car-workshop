@@ -38,20 +38,21 @@ class WorkplaceController {
     }
 
     @GetMapping("/{id}")
-    Workplace readIdWorkplaces(Integer workplaceId) {
+    Workplace readIdWorkplaces(@PathVariable("id") Long id) {
 
-        return workplaceService.findById(workplaceId)
+        return workplaceService.findById(id)
                 .orElseThrow();
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<WorkplaceDto> updateWorkplace(@PathVariable Integer id, @RequestBody @Validated WorkplaceDto workplaceDto) {
+    ResponseEntity<WorkplaceDto> updateWorkplace(@PathVariable("id") Long id, @RequestBody @Validated WorkplaceDto workplaceDto) {
         return ResponseEntity.ok(workplaceService.update(workplaceDto, id));
     }
 
     @DeleteMapping("/{id}")
-    void deleteWorkplace(Integer workplaceId) {
-        workplaceService.deleteById(workplaceId);
+    void deleteWorkplace(@PathVariable("id") Long id) {
+
+        workplaceService.deleteById(id);
     }
 
 }

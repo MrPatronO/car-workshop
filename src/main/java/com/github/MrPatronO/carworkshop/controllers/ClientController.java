@@ -4,12 +4,12 @@ import com.github.MrPatronO.carworkshop.dtos.ClientDto;
 import com.github.MrPatronO.carworkshop.dtos.NewClientDto;
 import com.github.MrPatronO.carworkshop.models.Client;
 import com.github.MrPatronO.carworkshop.services.ClientService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/clients")
@@ -18,14 +18,12 @@ class ClientController {
     @Autowired
     private final ClientService clientService;
 
-    public static final Logger logger = LoggerFactory.getLogger(ClientController.class);
-
     ClientController(ClientService clientService) {
         this.clientService = clientService;
     }
 
     @GetMapping
-    ResponseEntity<Client> readClients(@PathVariable int clientId) {
+    List<Client> readClients(Long clientId) {
 
         return clientService.findAll();
     }
@@ -37,19 +35,19 @@ class ClientController {
     }
 
     @GetMapping("/{id}")
-    Client readIdClients(@PathVariable int clientId) {
+    Client readIdClients(@PathVariable("id") Long id) {
 
-        return clientService.findById(clientId)
+        return clientService.findById(id)
                 .orElseThrow();
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<ClientDto> updateClient(@PathVariable Integer id, @RequestBody @Validated ClientDto clientDto) {
+    ResponseEntity<ClientDto> updateClient(@PathVariable("id") Long id, @RequestBody @Validated ClientDto clientDto) {
         return ResponseEntity.ok(clientService.update(clientDto, id));
     }
 
     @DeleteMapping("/{id}")
-    void deleteClient(@PathVariable int clientId) {
-        clientService.deleteById(clientId);
+    void deleteClient(@PathVariable("id") Long id) {
+        clientService.deleteById(id);
     }
 }

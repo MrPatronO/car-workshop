@@ -11,11 +11,9 @@ import java.math.BigDecimal;
 public class RepairDto {
 
     private Long repairId;
-    @NotBlank(message = "Description number may not be blank")
     private String description;
     private Client clientId;
     private Car carId;
-    @NotBlank(message = "Price may not be blank")
     private BigDecimal price;
     private Workplace workplaceId;
 

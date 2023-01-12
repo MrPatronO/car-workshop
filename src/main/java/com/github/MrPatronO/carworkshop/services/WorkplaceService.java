@@ -38,15 +38,15 @@ public class WorkplaceService {
         return workplaceRepository.findAll();
     };
 
-    public void deleteById(int workplaceId) {
-        workplaceRepository.deleteById(workplaceId);
+    public void deleteById(Long id) {
+        workplaceRepository.deleteById(id);
     }
 
-    public Optional<Workplace> findById(Integer workplaceId) {
+    public Optional<Workplace> findById(Long workplaceId) {
         return workplaceRepository.findById(workplaceId);
     }
 
-    public WorkplaceDto update(WorkplaceDto workplaceDto, Integer workplaceId) {
+    public WorkplaceDto update(WorkplaceDto workplaceDto, Long workplaceId) {
         Workplace updatedOrCreatedWorkplace = workplaceRepository.findById(workplaceId)
                 .map(workplace -> {
                     workplace.setDescription(workplaceDto.getDescription());

@@ -4,9 +4,9 @@ import com.github.MrPatronO.carworkshop.dtos.CarDto;
 import com.github.MrPatronO.carworkshop.dtos.NewCarDto;
 import com.github.MrPatronO.carworkshop.models.Car;
 import com.github.MrPatronO.carworkshop.repositories.CarRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -41,16 +41,17 @@ public class CarService {
     }
 
 
-    public ResponseEntity<Car> findAll() {
-        return null;
+    public List<Car> findAll() {
+        return carRepository.findAll();
     }
 
-    public Optional<Car> findById(Integer carId) {
-        return carRepository.findById(carId);
+    public Optional<Car> findById(Long id) {
+
+        return carRepository.findById(id);
     }
 
 
-    public CarDto update(CarDto carDto, Integer carId) {
+    public CarDto update(CarDto carDto, Long carId) {
         Car updatedOrCreatedCar = carRepository.findById(carId)
                 .map(car -> {
                     car.setBrand(carDto.getBrand());
@@ -82,6 +83,7 @@ public class CarService {
         return newCarDto;
     }
 
-    public void deleteById(Integer id) {
+    public void deleteById(Long id) {
+        carRepository.deleteById(id);
     }
 }
