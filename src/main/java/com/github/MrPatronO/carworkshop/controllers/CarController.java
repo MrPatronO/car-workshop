@@ -1,0 +1,60 @@
+package com.github.MrPatronO.carworkshop.controllers;
+
+import com.github.MrPatronO.carworkshop.dtos.CarDto;
+import com.github.MrPatronO.carworkshop.dtos.NewCarDto;
+import com.github.MrPatronO.carworkshop.models.Car;
+import com.github.MrPatronO.carworkshop.services.CarService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/cars")
+class CarController {
+
+    @Autowired
+    private final CarService carService;
+
+    public static final Logger logger = LoggerFactory.getLogger(CarController.class);
+
+    CarController(CarService carService) {
+        this.carService = carService;
+    }
+
+    @GetMapping
+    List<Car> readCars(Long carId) {
+
+        return carService.findAll();
+    }
+
+    @PostMapping
+    CarDto newCar(@RequestBody @Validated NewCarDto newCarDto) {
+
+        return  carService.save(newCarDto);
+    }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    Car readIdCars(@PathVariable("id")  Long id) {
+
+        return carService.findById(id)
+                .orElseThrow();
+    }
+
+    @PutMapping("/{id}")
+    ResponseEntity<CarDto> updateCar(@PathVariable("id") Long id,@RequestBody @Validated CarDto carDto) {
+        return ResponseEntity.ok(carService.update(carDto, id));
+    }
+
+    @DeleteMapping("/{id}")
+    void deleteCar(@PathVariable("id")  Long id) {
+        carService.deleteById(id);
+    }
+
+
+}
