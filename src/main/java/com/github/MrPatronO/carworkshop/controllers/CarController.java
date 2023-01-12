@@ -12,7 +12,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/cars")
@@ -41,9 +40,10 @@ class CarController {
 
     @GetMapping("/{id}")
     @ResponseBody
-    Optional<Car> readIdCars(@PathVariable("id")  Long id) {
+    Car readIdCars(@PathVariable("id")  Long id) {
 
-        return carService.findById(id);
+        return carService.findById(id)
+                .orElseThrow();
     }
 
     @PutMapping("/{id}")

@@ -49,12 +49,12 @@ public class RepairService {
 
             RepairDto repairDto = new RepairDto();
             repairDto.setRepairId(newRepair.getRepairId());
-            repairDto.setCarId(newRepair.getCar());
-            repairDto.setClientId(newRepair.getClient());
+            repairDto.setCarId(newRepair.getCar().getCarId());
+            repairDto.setClientId(newRepair.getClient().getClientId());
             repairDto.setDescription(newRepair.getDescription());
             repairDto.setPrice(newRepair.getPrice());
-            repairDto.setWorkplaceId(newRepair.getWorkplace());
-            repairDto.setTimetableId(newRepair.getTimetable());
+            repairDto.setWorkplaceId(newRepair.getWorkplace().getWorkplaceId());
+            repairDto.setTimetableId(newRepair.getTimetable().getTimetableId());
 
             return repairDto;
     }
@@ -73,37 +73,53 @@ public class RepairService {
     }
 
     public RepairDto update(RepairDto repairDto, Long repairId) {
+        logger.info("clientId =" + repairDto.getClientId() + " carId = " + repairDto.getCarId() + " workplaceId = " + repairDto.getWorkplaceId() + " timetableId = " + repairDto.getTimetableId());
+        Client client = clientService.findById(repairDto.getClientId()).orElseThrow(() -> new RuntimeException("Client not found"));
+        Car car = carService.findById(repairDto.getCarId()).orElseThrow(() -> new RuntimeException("Car not found"));
+        Workplace workplace = workplaceService.findById(repairDto.getWorkplaceId()).orElseThrow(() -> new RuntimeException("Workplace not found"));
+        Timetable timetable = timetableService.findById(repairDto.getTimetableId()).orElseThrow(() -> new RuntimeException("Timetable not found"));
+
+        Repair repair = new Repair();
+        repair.setCar(car);
+        repair.setClient(client);
+        repair.setDescription(repairDto.getDescription());
+        repair.setPrice(repairDto.getPrice());
+        repair.setWorkplace(workplace);
+        repair.setTimetable(timetable);
+
+        Repair newRepair = repairRepository.save(repair);
+
         Repair updatedOrCreatedRepair = repairRepository.findById(repairId)
-                .map(repair -> {
-                    repair.setTimetable(repairDto.getTimetableId());
-                    repair.setCar(repairDto.getCarId());
-                    repair.setClient(repairDto.getClientId());
-                    repair.setDescription(repairDto.getDescription());
-                    repair.setPrice(repairDto.getPrice());
-                    repair.setWorkplace(repairDto.getWorkplaceId());
+                .map(repairs -> {
+                    repairs.setTimetable(newRepair.getTimetable());
+                    repairs.setCar(newRepair.getCar());
+                    repairs.setClient(newRepair.getClient());
+                    repairs.setDescription(newRepair.getDescription());
+                    repairs.setPrice(newRepair.getPrice());
+                    repairs.setWorkplace(newRepair.getWorkplace());
 
                     return repairRepository.save(repair);
                 })
                 .orElseGet(() -> {
-                    Repair repair = new Repair();
-                    repair.setRepairId(repairDto.getRepairId());
-                    repair.setTimetable(repairDto.getTimetableId());
-                    repair.setCar(repairDto.getCarId());
-                    repair.setClient(repairDto.getClientId());
-                    repair.setDescription(repairDto.getDescription());
-                    repair.setPrice(repairDto.getPrice());
-                    repair.setWorkplace(repairDto.getWorkplaceId());
+                    Repair repairs = new Repair();
+                    repairs.setRepairId(newRepair.getRepairId());
+                    repairs.setTimetable(newRepair.getTimetable());
+                    repairs.setCar(newRepair.getCar());
+                    repairs.setClient(newRepair.getClient());
+                    repairs.setDescription(newRepair.getDescription());
+                    repairs.setPrice(newRepair.getPrice());
+                    repairs.setWorkplace(newRepair.getWorkplace());
 
                     return repairRepository.save(repair);
                 });
         RepairDto newRepairDto = new RepairDto();
         newRepairDto.setRepairId(updatedOrCreatedRepair.getRepairId());
-        newRepairDto.setTimetableId(updatedOrCreatedRepair.getTimetable());
-        newRepairDto.setCarId(updatedOrCreatedRepair.getCar());
-        newRepairDto.setClientId(updatedOrCreatedRepair.getClient());
+        newRepairDto.setTimetableId(updatedOrCreatedRepair.getTimetable().getTimetableId());
+        newRepairDto.setCarId(updatedOrCreatedRepair.getCar().getCarId());
+        newRepairDto.setClientId(updatedOrCreatedRepair.getClient().getClientId());
         newRepairDto.setDescription(updatedOrCreatedRepair.getDescription());
         newRepairDto.setPrice(updatedOrCreatedRepair.getPrice());
-        newRepairDto.setWorkplaceId(updatedOrCreatedRepair.getWorkplace());
+        newRepairDto.setWorkplaceId(updatedOrCreatedRepair.getWorkplace().getWorkplaceId());
 
         return newRepairDto;
     }

@@ -4,7 +4,6 @@ import com.github.MrPatronO.carworkshop.dtos.ClientDto;
 import com.github.MrPatronO.carworkshop.dtos.NewClientDto;
 import com.github.MrPatronO.carworkshop.models.Client;
 import com.github.MrPatronO.carworkshop.repositories.ClientRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +19,7 @@ public class ClientService {
     }
 
     public Optional<Client> findById(Long clientId) {
+
         return clientRepository.findById(clientId);
     }
 
