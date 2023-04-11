@@ -42,32 +42,11 @@ public class TimetableService {
             throw new IllegalArgumentException("Between start and end repair date can't be more than 30 days");
         }
 
-
-
-        /*
-        startDay 1.03
-        endDay 12.03
-
-        dodany w bazie rekord
-        startDayDB - 8.03
-        endDayDB - 13.03
-
-        SELECT startOfRepair, endOfRepair from timetable where startOfRepair >= setStartOfRepair AND endOfRepair >= setStartOfRepair
-
-        if(startDayDB => startDay && startDayDB <= endDay){
-            throw
+        List foundedTimetables = timetableRepository.findTimetableInPeriod(newTimetableDto.getStartOfRepair(), newTimetableDto.getEndOfRepair());
+        if (foundedTimetables.size() > 0){
+            throw new IllegalArgumentException("This term is busy!");
         }
 
-
-        startDayDB 20.02
-        endDayDB 8.03
-
-        if(startDayDB => startDay && startDayDB <= endDay)
-
-
-        startDayDB 20.02
-        endDayDB 14.03
-        */
 
         Timetable timetable = new Timetable();
         timetable.setEndOfRepair(newTimetableDto.getEndOfRepair());
