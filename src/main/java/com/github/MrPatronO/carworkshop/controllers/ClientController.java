@@ -29,13 +29,14 @@ class ClientController {
     }
 
     @PostMapping
-    ClientDto newClient(@RequestBody @Validated NewClientDto newClientDto) {
+    ResponseEntity<ClientDto> newClient(@RequestBody @Validated NewClientDto newClientDto) {
 
-        return  clientService.save(newClientDto);
+        return  ResponseEntity.ok(clientService.save(newClientDto));
     }
 
     @GetMapping("/{id}")
-    Client readIdClients(@PathVariable("id") Long id) {
+    @ResponseBody
+    Client readClient(@PathVariable("id") Long id) {
 
         return clientService.findById(id)
                 .orElseThrow();

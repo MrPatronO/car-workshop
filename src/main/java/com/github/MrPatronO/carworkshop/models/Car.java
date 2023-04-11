@@ -1,6 +1,7 @@
 package com.github.MrPatronO.carworkshop.models;
 
 
+import com.github.MrPatronO.carworkshop.dtos.CarDto;
 import jakarta.persistence.*;
 
 
@@ -9,7 +10,7 @@ import java.util.Objects;
 
 
 @Entity
-public class Car{
+public class Car {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)

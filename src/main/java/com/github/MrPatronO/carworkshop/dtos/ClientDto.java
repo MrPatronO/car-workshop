@@ -2,7 +2,7 @@ package com.github.MrPatronO.carworkshop.dtos;
 
 public class ClientDto {
 
-    private int clientId;
+    private Long clientId;
 
     private String name;
 
@@ -15,12 +15,14 @@ public class ClientDto {
     private String address;
 
 
+
+
     public long getClientId() {
         return clientId;
     }
 
     public void setClientId(Long clientId) {
-        this.clientId = Math.toIntExact(clientId);
+        this.clientId = clientId;
     }
 
     public String getName() {

@@ -18,8 +18,8 @@ public class ClientService {
         this.clientRepository = clientRepository;
     }
 
-    public Optional<Client> findById(Long clientId) {
 
+    public Optional<Client> findById(Long clientId) {
         return clientRepository.findById(clientId);
     }
 
@@ -34,15 +34,7 @@ public class ClientService {
 
         Client newClient = clientRepository.save(client);
 
-        ClientDto clientDto = new ClientDto();
-        clientDto.setClientId(newClient.getClientId());
-        clientDto.setName(newClient.getName());
-        clientDto.setAddress(newClient.getAddress());
-        clientDto.setEmail(newClient.getEmail());
-        clientDto.setNip(newClient.getNip());
-        clientDto.setPhoneNumber(newClient.getPhoneNumber());
-
-        return clientDto;
+        return mapToClientDto(newClient);
     }
 
 
@@ -60,33 +52,40 @@ public class ClientService {
     public ClientDto update(ClientDto clientDto, Long clientId) {
         Client updatedOrCreatedClient = clientRepository.findById(clientId)
                 .map(client -> {
-                    client.setNip(clientDto.getNip());
-                    client.setPhoneNumber(clientDto.getPhoneNumber());
-                    client.setEmail(clientDto.getEmail());
-                    client.setAddress(clientDto.getAddress());
-                    client.setName(clientDto.getName());
-                    return clientRepository.save(client);
+
+                    mapToClient(client, clientDto);
+                    return  clientRepository.save(client);
                 })
                 .orElseGet(() -> {
                     Client client = new Client();
                     client.setClientId(clientDto.getClientId());
-                    client.setNip(clientDto.getNip());
-                    client.setPhoneNumber(clientDto.getPhoneNumber());
-                    client.setEmail(clientDto.getEmail());
-                    client.setAddress(clientDto.getAddress());
-                    client.setName(clientDto.getName());
+                    mapToClient(client, clientDto);
 
                     return clientRepository.save(client);
                 })  ;
-        ClientDto newClientDto = new ClientDto();
-        newClientDto.setClientId(updatedOrCreatedClient.getClientId());
-        newClientDto.setNip(updatedOrCreatedClient.getNip());
-        newClientDto.setPhoneNumber(updatedOrCreatedClient.getPhoneNumber());
-        newClientDto.setEmail(updatedOrCreatedClient.getEmail());
-        newClientDto.setAddress(updatedOrCreatedClient.getAddress());
-        newClientDto.setName(updatedOrCreatedClient.getName());
 
-        return newClientDto;
+        return mapToClientDto(updatedOrCreatedClient);
     }
 
+
+    private ClientDto mapToClientDto(Client client){
+
+        ClientDto clientDto = new ClientDto();
+        clientDto.setClientId(client.getClientId());
+        clientDto.setName(client.getName());
+        clientDto.setAddress(client.getAddress());
+        clientDto.setEmail(client.getEmail());
+        clientDto.setNip(client.getNip());
+        clientDto.setPhoneNumber(client.getPhoneNumber());
+
+        return clientDto;
+    }
+
+    private void mapToClient(Client client, ClientDto clientDto){
+        client.setNip(clientDto.getNip());
+        client.setPhoneNumber(clientDto.getPhoneNumber());
+        client.setEmail(clientDto.getEmail());
+        client.setAddress(clientDto.getAddress());
+        client.setName(clientDto.getName());
+    }
 }

@@ -1,8 +1,6 @@
 package com.github.MrPatronO.carworkshop.dtos;
 
 
-import jakarta.validation.constraints.NotBlank;
-
 public class CarDto {
 
 
@@ -17,6 +15,11 @@ public class CarDto {
     private double engine;
 
     private String typeFuel;
+
+    public  CarDto(){
+
+    }
+
 
     public Long getCarId() {
         return carId;

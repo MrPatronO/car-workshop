@@ -20,8 +20,6 @@ class RepairController {
     @Autowired
     private final RepairService repairService;
 
-    public static final Logger logger = LoggerFactory.getLogger(RepairController.class);
-
     RepairController(RepairService repairService) {
         this.repairService = repairService;
     }

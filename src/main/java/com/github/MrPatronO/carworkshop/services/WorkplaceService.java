@@ -26,12 +26,7 @@ public class WorkplaceService {
 
         Workplace newWorkplace = workplaceRepository.save(workplace);
 
-        WorkplaceDto workplaceDto = new WorkplaceDto();
-        workplaceDto.setWorkplaceId(newWorkplace.getWorkplaceId());
-        workplaceDto.setType(newWorkplace.getType());
-        workplaceDto.setDescription(newWorkplace.getDescription());
-
-        return workplaceDto;
+        return mapToWorkplaceDto(newWorkplace);
     }
 
     public List<Workplace> findAll(){
@@ -49,26 +44,34 @@ public class WorkplaceService {
     public WorkplaceDto update(WorkplaceDto workplaceDto, Long workplaceId) {
         Workplace updatedOrCreatedWorkplace = workplaceRepository.findById(workplaceId)
                 .map(workplace -> {
-                    workplace.setDescription(workplaceDto.getDescription());
-                    workplace.setType(workplaceDto.getType());
 
+                    mapToWorkplace(workplace ,workplaceDto);
                     return workplaceRepository.save(workplace);
                 })
                 .orElseGet(() -> {
                     Workplace workplace = new Workplace();
                     workplace.setWorkplaceId(workplaceDto.getWorkplaceId());
-                    workplace.setDescription(workplaceDto.getDescription());
-                    workplace.setType(workplaceDto.getType());
+
+                    mapToWorkplace(workplace ,workplaceDto);
 
                     return workplaceRepository.save(workplace);
                 })  ;
-        WorkplaceDto newWorkplaceDto = new WorkplaceDto();
-        newWorkplaceDto.setWorkplaceId(updatedOrCreatedWorkplace.getWorkplaceId());
-        newWorkplaceDto.setDescription(updatedOrCreatedWorkplace.getDescription());
-        newWorkplaceDto.setType(updatedOrCreatedWorkplace.getType());
 
+        return mapToWorkplaceDto(updatedOrCreatedWorkplace);
+    }
 
-        return newWorkplaceDto;
+    private WorkplaceDto mapToWorkplaceDto(Workplace workplace){
+        WorkplaceDto workplaceDto = new WorkplaceDto();
+        workplaceDto.setWorkplaceId(workplace.getWorkplaceId());
+        workplaceDto.setType(workplace.getType());
+        workplaceDto.setDescription(workplace.getDescription());
+
+        return workplaceDto;
+    }
+
+    private void mapToWorkplace(Workplace workplace, WorkplaceDto workplaceDto){
+        workplace.setDescription(workplaceDto.getDescription());
+        workplace.setType(workplaceDto.getType());
     }
 
  }

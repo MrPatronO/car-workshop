@@ -5,18 +5,18 @@ import java.time.LocalDateTime;
 
 public class NewTimetableDto {
 
-    private int workplace;
+    private Long workplaceId;
 
     private LocalDateTime startOfRepair;
 
     private LocalDateTime endOfRepair;
 
-    public int getWorkplace() {
-        return workplace;
+    public Long getWorkplaceId() {
+        return workplaceId;
     }
 
-    public void setWorkplace(int workplace) {
-        this.workplace = workplace;
+    public void setWorkplaceId(Long workplaceId) {
+        this.workplaceId = workplaceId;
     }
 
     public LocalDateTime getStartOfRepair() {

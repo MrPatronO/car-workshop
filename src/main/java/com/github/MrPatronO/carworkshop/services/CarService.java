@@ -29,19 +29,12 @@ public class CarService {
 
         Car newCar = carRepository.save(car);
 
-        CarDto carDto = new CarDto();
-        carDto.setCarId(newCar.getCarId());
-        carDto.setVintage(newCar.getVintage());
-        carDto.setTypeFuel(newCar.getTypeFuel());
-        carDto.setModel(newCar.getModel());
-        carDto.setEngine(newCar.getEngine());
-        carDto.setBrand(newCar.getBrand());
-
-        return carDto;
+        return mapToCarDto(newCar);
     }
 
 
     public List<Car> findAll() {
+
         return carRepository.findAll();
     }
 
@@ -54,36 +47,48 @@ public class CarService {
     public CarDto update(CarDto carDto, Long carId) {
         Car updatedOrCreatedCar = carRepository.findById(carId)
                 .map(car -> {
-                    car.setBrand(carDto.getBrand());
-                    car.setEngine(carDto.getEngine());
-                    car.setModel(carDto.getModel());
-                    car.setVintage(carDto.getVintage());
-                    car.setTypeFuel(carDto.getTypeFuel());
+                    mapToCar(car,carDto);
                     return carRepository.save(car);
                 })
                 .orElseGet(() -> {
                     Car car = new Car();
                     car.setCarId(carDto.getCarId());
-                    car.setVintage(carDto.getVintage());
-                    car.setTypeFuel(carDto.getTypeFuel());
-                    car.setModel(carDto.getModel());
-                    car.setEngine(carDto.getEngine());
-                    car.setBrand(carDto.getBrand());
+
+                    mapToCar(car,carDto);
 
                     return carRepository.save(car);
                 })  ;
-        CarDto newCarDto = new CarDto();
-        newCarDto.setCarId(updatedOrCreatedCar.getCarId());
-        newCarDto.setVintage(updatedOrCreatedCar.getVintage());
-        newCarDto.setTypeFuel(updatedOrCreatedCar.getTypeFuel());
-        newCarDto.setModel(updatedOrCreatedCar.getModel());
-        newCarDto.setEngine(updatedOrCreatedCar.getEngine());
-        newCarDto.setBrand(updatedOrCreatedCar.getBrand());
 
-        return newCarDto;
+        Car newCar = carRepository.save(updatedOrCreatedCar);
+
+        return mapToCarDto(newCar);
     }
 
     public void deleteById(Long id) {
+
         carRepository.deleteById(id);
     }
+
+
+    private CarDto mapToCarDto(Car car){
+
+        CarDto carDto = new CarDto();
+        carDto.setCarId(car.getCarId());
+        carDto.setVintage(car.getVintage());
+        carDto.setTypeFuel(car.getTypeFuel());
+        carDto.setModel(car.getModel());
+        carDto.setEngine(car.getEngine());
+        carDto.setBrand(car.getBrand());
+
+        return carDto;
+    }
+
+    private void mapToCar(Car car, CarDto carDto){
+        car.setBrand(carDto.getBrand());
+        car.setEngine(carDto.getEngine());
+        car.setModel(carDto.getModel());
+        car.setVintage(carDto.getVintage());
+        car.setTypeFuel(carDto.getTypeFuel());
+    }
+
 }

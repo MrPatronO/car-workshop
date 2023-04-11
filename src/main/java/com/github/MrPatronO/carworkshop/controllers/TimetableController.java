@@ -41,6 +41,11 @@ class TimetableController {
                 .orElseThrow();
     }
 
+    @GetMapping("/reserved/{workplaceId}")
+    List<TimetableDto> findReservedTimetable(@PathVariable("workplaceId") Long workplaceId, @RequestParam(required = false) Integer year, @RequestParam(required = false) Integer month){
+            return timetableService.findReservedTimetable(workplaceId, year, month);
+    }
+
     @PutMapping("/{id}")
     ResponseEntity<TimetableDto> updateTimetable(@PathVariable("id") Long id, @RequestBody @Validated TimetableDto timetableDto) {
         return ResponseEntity.ok(timetableService.update(timetableDto, id));
